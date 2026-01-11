@@ -1,39 +1,33 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">PaletteForge</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿<MudAppBar Color="Color.Primary" Elevation="1">
+    <MudAppBar Elevation="1" Dense="@_dense">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudText Typo="Typo.h6">Palette Forge</MudText>
+        <MudSpacer />
+        <MudText Typo="Typo.body1" Align="Align.Center">Awesome Slogan Here <MudIcon Icon="@Icons.Material.Filled.ColorLens" /></MudText>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/jaydenCowley/PaletteForge" Target="_blank" />
+    </MudAppBar>
+</MudAppBar>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+<MudDrawer @bind-Open="@_open" ClipMode="_clipMode" Breakpoint="@_breakpoint" Elevation="1" Variant="@DrawerVariant.Mini">
+    <MudNavMenu>
+    <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home" Href="/">Home</MudNavLink>
+    <MudDivider />
+    <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Palette" Href="/CreatePalette">Create a Color Palette</MudNavLink>
+        <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Save" Href="/SavedPalette">Saved Color Palettes</MudNavLink>
+    <MudDivider />
+        <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Info" Href="/About">About</MudNavLink>
+    </MudNavMenu>
+</MudDrawer>
 
 @code {
-    private bool collapseNavMenu = true;
+    private bool _open = false;
+    private bool _dense = false;
+    private Breakpoint _breakpoint = Breakpoint.Lg;
+    private DrawerClipMode _clipMode = DrawerClipMode.Never;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
+    private void ToggleDrawer()
     {
-        collapseNavMenu = !collapseNavMenu;
+        _open = !_open;
     }
 }
