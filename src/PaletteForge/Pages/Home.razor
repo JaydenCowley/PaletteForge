@@ -1,29 +1,11 @@
 ﻿@page "/"
 @using MudBlazor.Utilities
+@using PaletteForge.Components
+
+<MudText Typo="Typo.h4" Class="m-3">Welcome to Palette Forge!</MudText>
 
 <ErrorBoundary>
     <ChildContent>
-            <MudSlider Label="Theme Darkness" @bind-Value="_themeDarkness"TickMarks="true" Step="85" Min="-255" Max="255"/>
-            <div class="d-flex justify-content-between">
-                @foreach (var icon in _themeIcons)
-                {
-                    <MudIcon Icon="@icon" Size="Size.Small" Color="Color.Default" />
-            }
-            </div>
-        <MudColorPicker Label="Basic Color Picker" @bind-Text="_colorValue" Style="@($"color: {_colorValue};")" Placeholder="Select Color" />
+        <ColorSelectionTool />
     </ChildContent>
 </ErrorBoundary>
-
-@code {
-    private string _colorValue = "#ffffff";
-    private int _themeDarkness = 50;
-    private readonly string[] _themeIcons = new[] {
-    Icons.Material.Filled.Brightness1,
-        Icons.Material.Filled.Brightness2,
-        Icons.Material.Filled.Brightness3,
-        Icons.Material.Filled.Brightness4,
-        Icons.Material.Filled.Brightness5,
-        Icons.Material.Filled.Brightness6,
-        Icons.Material.Filled.Brightness7
-    };
-}
